@@ -1,107 +1,70 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cis_work_shop/task1.dart';
+import 'package:cis_work_shop/task2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex =0 ;
+  final List<Widget> _screens =const[
+    Task1Screen(),
+    Task2(),
+    Task1Screen(),
+    Task2(),
+  ];
+  //GlobalKey validate = GlobalKey().
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         centerTitle: true,
-        leading: const Icon(Icons.account_circle),
+        leading: const Icon(Icons.menu),
         elevation: 1,
-        title: const Text('Appbar Name'),
+        title: const Text('Home'),
         actions: const [
           IconButton(
               onPressed: openMenu,
               color: Colors.white,
-              iconSize: 35,
+              iconSize: 28,
               icon: Icon(
-                Icons.more_vert,
+                Icons.notification_important_outlined,
               )),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: [
-            const SizedBox(height: 50,),
-            Container(
-              height: 160,
-              width: 160,  //color: Colors.red, error
-              decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(image: AssetImage('assets/images/cat.jpg'),fit: BoxFit.fill)
-              ),
-            ),
-            const Text(
-              'This is my cat',
-              style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Caveat'
-              ),
-            ),
-            const Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-              ),
-            ),
-            const Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-              ),
-            ),
-            const Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-              ),
-            ),
-
-
-            // const Divider(
-            //   color: Colors.red,
-            //   height: 2,
-            //   thickness: 5,
-            //   endIndent: 0,indent: 50,
-            // ),
-            // Container(
-            //   height: 160,
-            //   width: 160,  //color: Colors.red, error
-            //   decoration: const BoxDecoration(
-            //       color: Colors.red,
-            //       shape: BoxShape.circle,
-            //       image: DecorationImage(image: AssetImage('assets/images/cat.jpg'),fit: BoxFit.fill)
-            //   ),
-            // ),
-            // const Text(
-            //   'This is my cat',
-            //   style: TextStyle(
-            //       fontSize: 35,
-            //       color: Colors.white,
-            //       fontWeight: FontWeight.bold,
-            //       fontFamily: 'Caveat'
-            //   ),
-            // ),
-            // const Divider(color: Colors.amber,height: 2,thickness: 5,endIndent: 50,indent: 0,),
-
-
-
-          ],
-        ),
+      body: _screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey[700],
+        fixedColor: Colors.deepOrange,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.shifting,
+        currentIndex: currentIndex,
+        showUnselectedLabels: false,
+        elevation: 10,
+        onTap: (int index){
+          print(index);
+          setState(() {currentIndex =index;});
+        },
+        items:const [
+          BottomNavigationBarItem(icon: Icon(Icons.home,),label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search,),label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.notification_important,),label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle,),label: 'home'),
+        ],
       ),
+
+
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: Colors.deepOrange,
+      //   clipBehavior: Clip.antiAliasWithSaveLayer,
       //   child: const Icon(
       //     Icons.add,
       //     size: 32,
@@ -111,6 +74,7 @@ class HomeScreen extends StatelessWidget {
       //   },
       // ),
     );
+
   }
 }
 //   Image.asset('assets/images/cat.jpg'),

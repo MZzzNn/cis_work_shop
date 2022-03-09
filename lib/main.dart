@@ -1,4 +1,6 @@
 import 'package:cis_work_shop/task1.dart';
+import 'package:cis_work_shop/task2.dart';
+import 'package:cis_work_shop/task3.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
@@ -11,9 +13,8 @@ class MyApp extends StatelessWidget {
     return  const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'First App',
-      home: HomeScreen()
+      home: Task3Screen()
     );
   }
 }
-
 
